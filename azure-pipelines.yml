@@ -20,9 +20,10 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
+- stage: Build and deploy
   displayName: Build and push stage
   jobs:  
+
   - job: Build
     displayName: Build
     pool:
@@ -38,3 +39,12 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+     
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: $(azureConnection)
+        appType: 'webAppContainer'
+        WebAppName: 'spikedocker'
+        DockerNamespace: 'spikedocker.azurecr.io'
+        DockerRepository: 'web'
