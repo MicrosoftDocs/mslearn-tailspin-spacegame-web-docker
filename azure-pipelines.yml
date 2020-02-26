@@ -48,3 +48,5 @@ stages:
         WebAppName: 'spikedocker'
         DockerNamespace: 'spikedocker.azurecr.io'
         DockerRepository: 'web'
+        DockerImageTag: |
+          $(tag)
