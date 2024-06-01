@@ -1,7 +1,5 @@
-pr:
-  branches:
-    include:
-      - main
+trigger:
+  - main
 
 variables:
   buildConfiguration: "Release"
